@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :issues
-  post 'receive', to: 'receive#new'
-  resources :events
+  post 'receive', to: 'events#new'
+  get 'issues/:id/events', to: 'events#list'
 end
