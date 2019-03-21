@@ -8,7 +8,9 @@ class EventsController < ApplicationController
   end
 
   def list
-    @events = Event.where(issue_id: params[:id])
+    @events = Event.all
+    p params[:type]
+    p params[:id]
     render json: @events
   end
 
