@@ -5,6 +5,7 @@ module Events
     end
 
     def call
+      Result.new(true, nil, "EVENT")
     end
 
     private
