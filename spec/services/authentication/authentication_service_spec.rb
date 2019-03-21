@@ -2,13 +2,16 @@ require 'rails_helper'
 
 RSpec.describe Authentication::AuthenticationService do
 
-  let(:git_key) { "sha1=d5b0f38c514275267fa3f5b2fe7162a44af693f4" }
-  let(:webhook_params) { WebhookParams.new.params }
+  let(:webhook_params) { WebhookParams.new }
+  let(:git_key) { webhook_params.git_key }
+  let(:params) { webhook_params.params }
+
   let(:service) do
-    described_class.call(git_key, webhook_params)
+    described_class.call(git_key, params)
   end
+
   let(:service2) do
-    described_class.call("ahgjshjahsj", webhook_params)
+    described_class.call("ahgjshjahsj", params)
   end
 
   describe "Call" do
