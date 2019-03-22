@@ -8,10 +8,9 @@ class EventsController < ApplicationController
   end
 
   def list
-    @events = Event.all
-    p params[:type]
-    p params[:id]
-    render json: @events
+    result = Events::EventSearchService.call(params)
+    @events = result.value
+    render json: @events, status: result.success? ? :ok : :no_content
   end
 
   private
