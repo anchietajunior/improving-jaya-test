@@ -14,8 +14,16 @@ module Authentication
 
     attr_accessor :params
 
+    def auth_params?
+      params[:login].present? && params[:password].present?
+    end
+
+    def corret_params?
+      params[:login] == ENV['LOGIN'] && params[:password] == ENV['PASSWORD']
+    end
+
     def authenticate!
-      return "authenticated" if params[:login] == ENV['LOGIN'] && params[:password] == ENV['PASSWORD']
+      return "authenticated" if auth_params? && corret_params?
       raise NotAuthorizedException
     end
   end

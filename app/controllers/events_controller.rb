@@ -9,10 +9,13 @@ class EventsController < ApplicationController
   end
 
   def list
-    p request.headers['login']
     result = Events::EventSearchService.call(params)
     @events = result.value
-    render json: @events, status: result.success? ? :ok : :no_content
+    if @basic_auth.success?
+      render json: @events
+    else
+      render json: { "message": "Not authorized"}
+    end
   end
 
   private
@@ -24,6 +27,6 @@ class EventsController < ApplicationController
   end
 
   def authenticate_user
-    @basic_auth
+    @basic_auth = Authentication::BasicAuthService.call(request.headers)
   end
 end
