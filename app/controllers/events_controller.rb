@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   def new
     request.body.rewind
     @request_body = request.body.read
-    Events::EventCreatorService.call(request_body) if @webhook_authentication.success?
+    Events::EventCreatorService.call(@request_body) if @webhook_authentication.success?
     head :ok
   end
 
