@@ -5,7 +5,7 @@ class EventsController < ApplicationController
 
   def new
     request.body.rewind
-    request_body = request.body.read
+    @request_body = request.body.read
     Events::EventCreatorService.call(request_body) if @webhook_authentication.success?
     head :ok
   end
@@ -23,7 +23,7 @@ class EventsController < ApplicationController
   private
 
   def webhook_authenticate
-    @webhook_authentication = Authentication::AuthenticationService.call(request.headers['X-Hub-Signature'], request_body)
+    @webhook_authentication = Authentication::AuthenticationService.call(request.headers['X-Hub-Signature'], @request_body)
   end
 
   def authenticate_user
