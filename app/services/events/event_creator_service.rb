@@ -5,6 +5,7 @@ module Events
     end
 
     def call
+      binding.pry
       Result.new(true, nil, create_event!)
     rescue StandardError => e
       Result.new(false, e.message, nil)
