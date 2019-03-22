@@ -1,24 +1,25 @@
-# README
+# Improving Jaya Test
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## This is a test app
 
-Things you may want to cover:
+* Ruby 2.5
 
-* Ruby version
+* 5.2
 
-* System dependencies
+## Setup application
 
-* Configuration
+* bundle install
 
-* Database creation
+* rails db:create && rails db:migrate
 
-* Database initialization
+Create a .env file in the root folder
 
-* How to run the test suite
+```
+GIT_KEY=eHh4Onh4eA==
+LOGIN=xxx
+PASSWORD=xxx
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+## Run tests
 
-* Deployment instructions
-
-* ...
+rspec
