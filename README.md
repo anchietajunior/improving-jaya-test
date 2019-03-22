@@ -20,6 +20,14 @@ LOGIN=xxx
 PASSWORD=xxx
 ```
 
+## Run rails server
+
+rails s -p 4000
+
+## Run ngrok
+
+ngrok http 3000
+
 ## Run tests
 
 rspec
