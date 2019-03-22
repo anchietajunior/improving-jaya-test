@@ -13,6 +13,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # gem 'rack-cors'
 
 group :development, :test do
+  gem 'pry'
+  gem 'pry-rails'
   gem 'dotenv-rails'
   gem 'rspec-rails', '~> 3.8'
   gem 'factory_bot_rails'

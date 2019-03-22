@@ -1,36 +1,40 @@
 module Events
   class EventCreatorService < ApplicationService
-    def initialize(params)
-      @params = params
+    def initialize(request)
+      @request = JSON.parse(request)
     end
 
     def call
       Result.new(true, nil, create_event!)
+    rescue StandardError => e
+      Result.new(false, e.message, nil)
     end
 
     private
 
-    attr_accessor :params
+    attr_accessor :request
 
     def create_event!
-      Event.create!(issue)
+      Event.create! event_params
+    end
+
+    def action
+      request.first.last
     end
 
     def event_type
-
+      request.keys[1]
     end
 
-    def issue_params
-      {}.tap do |hash|
-        hash[:id]  = params["issue"]["number"]
-        hash[:url] = params["issue"]["url"]
-      end
+    def number
+      request["#{event_type}"]["number"]
     end
 
     def event_params
       {}.tap do |hash|
-        hash[:issue_id] = issue.id
-        hash[:action] =
+        hash[:event_type] = event_type
+        hash[:number] = number
+        hash[:action] = action
       end
     end
   end

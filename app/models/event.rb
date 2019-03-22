@@ -1,5 +1,3 @@
 class Event < ApplicationRecord
-  belongs_to :issue
-
-  validates :issue_id, :action, presence: true
+  validates :action, :event_type, :number, presence: true
 end

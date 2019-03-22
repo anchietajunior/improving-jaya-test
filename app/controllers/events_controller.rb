@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   before_action :authenticate
 
   def new
-    p @result
+    Events::EventCreatorService.call(@request_body) if @authentication.success?
     head :ok
   end
 
@@ -17,6 +17,8 @@ class EventsController < ApplicationController
   private
 
   def authenticate
-    @result = Authentication::AuthenticationService.call(request.headers['X-Hub-Signature'], request.body.read)
+    request.body.rewind
+    @request_body = request.body.read
+    @authentication = Authentication::AuthenticationService.call(request.headers['X-Hub-Signature'], @request_body)
   end
 end

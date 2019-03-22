@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2019_03_19_231503) do
   create_table "events", force: :cascade do |t|
     t.string "action"
     t.string "event_type"
+    t.integer "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
